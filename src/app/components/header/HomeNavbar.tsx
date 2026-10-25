@@ -7,8 +7,8 @@ export function HomeNavbar() {
     <div className="home-navbar">
       <Container>
         <Stack
-          direction="row"
           sx={{
+            flexDirection: "row",
             height: "50px",
             justifyContent: "space-between",
             alignItems: "center",
@@ -23,8 +23,8 @@ export function HomeNavbar() {
             </NavLink>
           </Box>
           <Stack
-            direction="row"
             sx={{
+              flexDirection: "row",
               minWidth: "700px",
               justifyContent: "space-between",
               alignItems: "center",
