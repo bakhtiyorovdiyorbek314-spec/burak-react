@@ -27,7 +27,7 @@ export default function Products() {
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Stack className={"avatar-big-box"}>
             <Stack className={"top-text"}>
-              <p>Bumarak Restaurant</p>
+              <p>Burak Restaurant</p>
               <Stack className={"single-search-big-box"}>
                 <input
                   type={"search"}

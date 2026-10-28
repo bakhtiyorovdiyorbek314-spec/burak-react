@@ -11,7 +11,7 @@ export default function HomeNavbar() {
         <Stack className="menu">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" src="/icons/bumarak.svg" />
+              <img className="brand-logo" src="/icons/burak.svg" />
             </NavLink>
           </Box>
           <Stack className="links">
