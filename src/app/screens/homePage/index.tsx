@@ -59,7 +59,6 @@ export default function HomePage() {
       .getTopUsers()
       .then((data) => setTopUsers(data))
       .catch((err) => console.log(err));
-    // 2 Slice:Data => Store (joylandi)
     //@ts-ignore
   }, []);
 
