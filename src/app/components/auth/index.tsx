@@ -8,8 +8,7 @@ import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
-import { MemberInput } from "../../../lib/types/member";
-import { MemberStatus, MemberType } from "../../../lib/enums/member.enum";
+import { LoginInput, MemberInput } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobal";
@@ -47,28 +46,32 @@ interface AuthenticationModalProps {
 export default function AuthenticationModal(props: AuthenticationModalProps) {
   const { signupOpen, loginOpen, handleSignupClose, handleLoginClose } = props;
   const classes = useStyles();
-  const [memberNick, setMemberNick] = useState<string>("");
-  const [memberPhone, setMemberPhone] = useState<string>("");
+
+  const [memmberNick, setMemberNick] = useState<string>("");
+  const [memberPhone, setMmberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
   const { setAuthMember } = useGlobals();
 
   /** HANDLERS **/
-  const handleUsername = (e: T) => {
+
+  const handleUsersname = (e: T) => {
     console.log(e.target.value);
     setMemberNick(e.target.value);
   };
 
   const handlePhone = (e: T) => {
-    setMemberPhone(e.target.value);
+    console.log(e.target.value);
+    setMmberPhone(e.target.value);
   };
 
   const handlePassword = (e: T) => {
+    console.log(e.target.value);
     setMemberPassword(e.target.value);
   };
 
   const handlePasswordKeyDown = (e: T) => {
     if (e.key === "Enter" && signupOpen) {
-      handleSignupClose();
+      handleSignupRequest().then();
     } else if (e.key === "Enter" && loginOpen) {
       handleLoginRequest().then();
     }
@@ -76,22 +79,19 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
   const handleSignupRequest = async () => {
     try {
-      console.log("Inputs:", memberNick, memberPassword, memberPassword);
       const isFulfill =
-        memberNick !== "" && memberPhone !== "" && memberPassword !== "";
+        memmberNick !== "" && memberPhone !== "" && memberPassword !== "";
       if (!isFulfill) throw new Error(Messages.error3);
 
       const signupInput: MemberInput = {
-        memberNick: memberNick,
+        memberNick: memmberNick,
         memberPhone: memberPhone,
         memberPassword: memberPassword,
-        memberType: MemberType.USER,
-        memberStatus: MemberStatus.ACTIVE,
       };
 
       const member = new MemberService();
       const result = await member.signup(signupInput);
-      //Saving Auth User
+      // Saving Authenticate User
       setAuthMember(result);
       handleSignupClose();
     } catch (err) {
@@ -103,19 +103,18 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
   const handleLoginRequest = async () => {
     try {
-      const isFulfill = memberNick !== "" && memberPassword !== "";
+      const isFulfill = memmberNick !== "" && memberPassword !== "";
       if (!isFulfill) throw new Error(Messages.error3);
 
-      const loginInput: MemberInput = {
-        memberNick: memberNick,
+      const loginInput: LoginInput = {
+        memberNick: memmberNick,
         memberPassword: memberPassword,
-        memberType: MemberType.USER,
-        memberStatus: MemberStatus.ACTIVE,
-        memberPhone: "",
       };
-      //Saving Auth User
+
       const member = new MemberService();
       const result = await member.login(loginInput);
+
+      // Saving Authenticate User
       setAuthMember(result);
       handleLoginClose();
     } catch (err) {
@@ -153,7 +152,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 id="outlined-basic"
                 label="username"
                 variant="outlined"
-                onChange={handleUsername}
+                onChange={handleUsersname}
               />
               <TextField
                 sx={{ my: "17px" }}
@@ -215,7 +214,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 label="username"
                 variant="outlined"
                 sx={{ my: "10px" }}
-                onChange={handleUsername}
+                onChange={handleUsersname}
               />
               <TextField
                 id={"outlined-basic"}
@@ -240,7 +239,4 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       </Modal>
     </div>
   );
-}
-function useGobals(): { setAuthMember: any } {
-  throw new Error("Function not implemented.");
 }

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setChosenProduct, setProducts, setRestaurant } from "./slice";
 import { Member } from "../../../lib/types/member";
 import { retrieveProducts } from "./selector";
-import ProductService from "../../services/ProductsSevice";
+import ProductService from "../../services/ProductsService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";

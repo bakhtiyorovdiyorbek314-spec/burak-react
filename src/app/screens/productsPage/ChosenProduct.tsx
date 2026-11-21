@@ -22,7 +22,7 @@ import {
   retrieveProducts,
   retrieveRestaurant,
 } from "./selector";
-import ProductService from "../../services/ProductsSevice";
+import ProductService from "../../services/ProductsService";
 import MemberService from "../../services/MemberService";
 import { serverApi } from "../../../lib/config";
 import { CartItem } from "../../../lib/types/search";

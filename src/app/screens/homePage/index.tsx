@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
 import { Product } from "../../../lib//types/product";
-import ProductService from "../../services/ProductsSevice";
+import ProductService from "../../services/ProductsService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import "../../../css/home.css";
 import MemberService from "../../services/MemberService";
