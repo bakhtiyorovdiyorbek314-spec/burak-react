@@ -8,7 +8,7 @@ const initialState: ProductsPageState = {
 }; //boshlangich qiymat
 
 const productsPageSlice = createSlice({
-  name: "homePage",
+  name: "productPage",
   initialState,
   reducers: {
     setRestaurant: (state, action) => {
