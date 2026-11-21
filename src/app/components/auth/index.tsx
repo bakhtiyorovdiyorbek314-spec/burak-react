@@ -12,6 +12,7 @@ import { MemberInput } from "../../../lib/types/member";
 import { MemberStatus, MemberType } from "../../../lib/enums/member.enum";
 import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { useGlobals } from "../../hooks/useGlobal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -49,6 +50,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
+  const { setAuthMember } = useGlobals();
 
   /** HANDLERS **/
   const handleUsername = (e: T) => {
@@ -87,9 +89,10 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
         memberStatus: MemberStatus.ACTIVE,
       };
 
-      //Saving Auth User
       const member = new MemberService();
       const result = await member.signup(signupInput);
+      //Saving Auth User
+      setAuthMember(result);
       handleSignupClose();
     } catch (err) {
       console.log(err);
@@ -236,4 +239,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       </Modal>
     </div>
   );
+}
+function useGobals(): { setAuthMember: any } {
+  throw new Error("Function not implemented.");
 }
